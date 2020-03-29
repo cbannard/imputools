@@ -10,8 +10,7 @@
 #'
 #' @examples
 #' get_weighted_descriptives(languageability,sampleweights)
-
-
+#' @export
 get_weighted_descriptives  <- function(variable,weights){
 
 N = length(variable)
