@@ -12,7 +12,7 @@
 #' get_weighted_descriptives(languageability,sampleweights)
 #' @export
 get_weighted_descriptives  <- function(variable,weights){
-
+descstats=vector()
 N = length(variable)
 M = length(weights)
 weightedvariable = variable*weights
@@ -22,8 +22,12 @@ SD = sqrt(sum(weights*(variable-av)^2)/((sum(weights)*(M-1))/M))
 LOWER=av-(SD/sqrt(N))*1.96
 UPPER=av+(SD/sqrt(N))*1.96
 
-print(av)
-print(SD)
-print(LOWER)
-print(UPPER)
+descstats[1] = av
+descstats[2] = SD
+descstats[3] = LOWER
+descstats[4] = UPPER
+print("MEAN: " + av)
+print("SD:" + SD)
+print("95% CI: " + LOWER + " " + UPPER)
+return(descstats)
 }
