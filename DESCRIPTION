@@ -1,0 +1,14 @@
+Package: imputools
+Title: Add-ons for dealing with multiply imputed data and related models in R.
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Colin",
+           family = "Bannard",
+           role = c("aut", "cre"),
+           email = "colinbannard@gmail.com",
+           comment = c(ORCID = "0000-0001-5579-5830"))
+Description: Add-ons for dealing with multiply imputed data and related models in R.
+License: CC0
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.2
