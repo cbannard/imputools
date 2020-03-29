@@ -26,8 +26,8 @@ descstats[1] = av
 descstats[2] = SD
 descstats[3] = LOWER
 descstats[4] = UPPER
-print("MEAN: " + av)
-print("SD:" + SD)
-print("95% CI: " + LOWER + " " + UPPER)
+#print(paste("MEAN: ",av))
+#print(paste("SD: ",SD))
+#print(paste("95% CI: ",LOWER," ",UPPER))
 return(descstats)
 }
