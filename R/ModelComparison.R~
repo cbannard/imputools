@@ -1,0 +1,34 @@
+;; This buffer is for text that is not saved, and for Lisp evaluation.
+;; To create a file, visit it with C-x C-f and enter text in its buffer.
+
+
+getModelComparisonStatsfromMI <- function(miobj,modelasstring){
+AICvalues=vector()
+Deviancevalues=vector()
+values_to_return=data.frame()
+for(i in 1:miobj$m){
+dataset = complete(miobj,i)
+m1 = paste("-2*logLik(lm(",modelasstring,",data=dataset))",sep="")
+Deviancevalues[i] = eval(parse(text=m1))
+m2 = paste("AIC(lm(",modelasstring,",data=dataset))",sep="")
+AICvalues[i] = eval(parse(text=m2))
+
+}
+
+values_to_return[1,1]=mean(Deviancevalues)
+values_to_return[2,1]=sd(Deviancevalues)
+values_to_return[3,1]=mean(Deviancevalues)-sd(AICvalues)/sqrt(length(Deviancevalues))*1.96
+values_to_return[4,1]=mean(Deviancevalues)+sd(AICvalues)/sqrt(length(Deviancevalues))*1.96
+
+
+
+values_to_return[1,2]=mean(AICvalues)
+values_to_return[2,2]=sd(AICvalues)
+values_to_return[3,2]=mean(AICvalues)-sd(AICvalues)/sqrt(length(AICvalues))*1.96
+values_to_return[4,2]=mean(AICvalues)+sd(AICvalues)/sqrt(length(AICvalues))*1.96
+row.names(values_to_return) <- c("Mean","SD","Upper","Lower")
+names(values_to_return) <- c("Deviance","AIC")
+return(values_to_return)
+
+}
+
