@@ -16,7 +16,7 @@ AICvalues=vector()
 Deviancevalues=vector()
 values_to_return=data.frame()
 for(i in 1:miobj$m){
-dataset = complete(miobj,i)
+dataset = mice::complete(miobj,i)
 m1 = paste("-2*logLik(lm(",modelasstring,",data=dataset))",sep="")
 Deviancevalues[i] = eval(parse(text=m1))
 m2 = paste("AIC(lm(",modelasstring,",data=dataset))",sep="")
