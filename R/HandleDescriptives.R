@@ -31,3 +31,26 @@ descstats[4] = UPPER
 #print(paste("95% CI: ",LOWER," ",UPPER))
 return(descstats)
 }
+#' A function to calculate mean, SD and CIs over imputed dataset descriptives
+#'
+#' @usage combine_imputed_descriptives(dataset)
+#'
+#' @param dataset data analyses are run on - each column should be a variable of interest and each row an imputed dataset
+#'
+#' @return  A data frame containing mean, SD and CIs for all imputed datasets
+#'
+#' @examples
+#' combine_imputed_descriptives(dataset)
+#' @export
+
+combine_imputed_descriptives <- function(dat){
+    combined = matrix(nrow=4,ncol=length(dat));
+  combined[1,] = apply(as.matrix(dat), 2, mean)
+  combined[2,] = apply(as.matrix(dat), 2, sd)
+      CIs = apply(as.matrix(dat), 2, function(x){mean(x)+c(-1.96,1.96)*sd(x)/sqrt(length(x))})
+      combined[3,] = CIs[1,]
+      combined[4,] = CIs[2,]
+     combined <- data.frame(combined)
+      names(combined) <- names(dat)
+return(combined)
+}
