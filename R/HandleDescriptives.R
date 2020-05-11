@@ -31,7 +31,6 @@ descstats[4] = UPPER
 #print(paste("95% CI: ",LOWER," ",UPPER))
 return(descstats)
 }
-
 #' A function to calculate mean, SD and CIs over imputed dataset descriptives
 #'
 #' @usage combine_imputed_descriptives(dataset)
@@ -53,4 +52,23 @@ combine_imputed_descriptives <- function(dat){
      combined <- data.frame(combined)
       names(combined) <- names(dat)
 return(combined)
+}
+#' A function to calculate group proportions for categorical variables in sample weighted data
+#'
+#' @usage get_weighted_proportions(x, y)
+#'
+#' @param x A vector of the factor for which proportions to be calculated.
+#'
+#' @param y A vector of weights for each of the values in x
+#'
+#' @return A numeric vector containing the proportions for each level of factor
+#'
+#' @examples
+#' get_weighted_proportions(highested,sampleweights)
+#' @export
+get_weighted_proportions  <- function(variable,weights){
+weighted_proportions=vector()
+indicator_variables = data.frame(dummy(variable,drop=TRUE))
+weighted_proportions = colSums(indicator_variables*weights)/sum(indicator_variables*weights)
+return(weighted_proportions)
 }
